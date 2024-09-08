@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão Pessoal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cartao">
+        <h2>Nome: <span id="nome"></span></h2>
+        <p><strong>Profissão:</strong> <span id="profissao"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Telefone:</strong> <span id="telefone"></span></p>
+        <p><strong>Habilidades:</strong></p>
+        <ul id="habilidades-list"></ul>
+    </div>
+
+    <script>
+        // Função para obter os parâmetros da URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Preenche os dados do cartão com os parâmetros recebidos
+        document.getElementById('nome').innerText = getUrlParameter('nome');
+        document.getElementById('profissao').innerText = getUrlParameter('profissao');
+        document.getElementById('email').innerText = getUrlParameter('email');
+        document.getElementById('telefone').innerText = getUrlParameter('telefone');
+
+        // Divide as habilidades e exibe como lista
+        const habilidades = getUrlParameter('habilidades').split(',');
+        const listaHabilidades = document.getElementById('habilidades-list');
+        habilidades.forEach(habilidade => {
+            const li = document.createElement('li');
+            li.textContent = habilidade.trim();
+            listaHabilidades.appendChild(li);
+        });
+    </script>
+</body>
+</html>
